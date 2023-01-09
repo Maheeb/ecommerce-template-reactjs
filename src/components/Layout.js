@@ -188,7 +188,7 @@ const Layout = () => {
                                   </div>
                               </div>
                           </div>
-                          {/*<div className="hero__item set-bg" data-setbg="img/hero/banner.jpg">*/}
+                         
                           <div className="hero__item set-bg" style={{backgroundImage: 'url(' + require('./img/hero/banner.jpg') + ')'}}>
                               <div className="hero__text">
                                   <span>FRUIT FRESH</span>

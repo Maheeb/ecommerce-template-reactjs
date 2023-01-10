@@ -1,7 +1,30 @@
 import {Link, useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {getFilteredProducts}   from "./store/globalArray.js";
 
 const Shop = () => {
-    let { shopId } = useParams();
+    let { catId } = useParams();
+    const categories = useSelector(state => state.create.categories);
+    const allProducts = useSelector(state => state.create.products);
+    const dispatch = useDispatch();
+    const [products,setProducts] = useState(allProducts);
+    // const [products,setProducts] = useState([]);
+
+
+    useEffect(() => {
+        // console.log(catId)
+        if (catId != undefined) {
+        let filteredProducts = allProducts.filter(product => product.catID == catId);
+        setProducts(filteredProducts)
+    }
+        else
+        {
+            setProducts(allProducts)
+        }
+    }, [catId]);
+
+
 
   return(
       <>
@@ -32,16 +55,11 @@ const Shop = () => {
                               <div className="sidebar__item">
                                   <h4>Department</h4>
                                   <ul>
-                                      <li><a href="#">Fresh Meat</a></li>
-                                      <li><a href="#">Vegetables</a></li>
-                                      <li><a href="#">Fruit & Nut Gifts</a></li>
-                                      <li><a href="#">Fresh Berries</a></li>
-                                      <li><a href="#">Ocean Foods</a></li>
-                                      <li><a href="#">Butter & Eggs</a></li>
-                                      <li><a href="#">Fastfood</a></li>
-                                      <li><a href="#">Fresh Onion</a></li>
-                                      <li><a href="#">Papayaya & Crisps</a></li>
-                                      <li><a href="#">Oatmeal</a></li>
+                                      {categories.length>0 && categories.map( (category, index) =>(
+                                          <li key={index}>
+                                              <a href="#">{category.text}</a>
+                                          </li>
+                                      ))}
                                   </ul>
                               </div>
                               <div className="sidebar__item">
@@ -272,9 +290,11 @@ const Shop = () => {
                               </div>
                           </div>
                           <div className="row">
-                              <div className="col-lg-4 col-md-6 col-sm-6">
+                              {products.length>0 && products.map((product,index) =>(
+                              <div className="col-lg-4 col-md-6 col-sm-6" key={index}>
                                   <div className="product__item">
-                                      <div className="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+                                      {/*<div className="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">*/}
+                                      <div className="product__item__pic set-bg"  style={{backgroundImage: 'url(' + require(`./img/product/${product.image}`) + ')'}}>
                                           <ul className="product__item__pic__hover">
                                               <li><a href="#"><i className="fa fa-heart"></i></a></li>
                                               <li><a href="#"><i className="fa fa-retweet"></i></a></li>
@@ -282,182 +302,19 @@ const Shop = () => {
                                           </ul>
                                       </div>
                                       <div className="product__item__text">
-                                          <h6><a href="#">Crab Pool Security</a></h6>
-                                          <h5>$30.00</h5>
+                                          <h6><a href="#">{product.name}</a></h6>
+                                          <h5>{product.price}$</h5>
                                       </div>
                                   </div>
                               </div>
-                              <div className="col-lg-4 col-md-6 col-sm-6">
-                                  <div className="product__item">
-                                      <div className="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                                          <ul className="product__item__pic__hover">
-                                              <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                          </ul>
-                                      </div>
-                                      <div className="product__item__text">
-                                          <h6><a href="#">Crab Pool Security</a></h6>
-                                          <h5>$30.00</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div className="col-lg-4 col-md-6 col-sm-6">
-                                  <div className="product__item">
-                                      <div className="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">
-                                          <ul className="product__item__pic__hover">
-                                              <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                          </ul>
-                                      </div>
-                                      <div className="product__item__text">
-                                          <h6><a href="#">Crab Pool Security</a></h6>
-                                          <h5>$30.00</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div className="col-lg-4 col-md-6 col-sm-6">
-                                  <div className="product__item">
-                                      <div className="product__item__pic set-bg" data-setbg="img/product/product-4.jpg">
-                                          <ul className="product__item__pic__hover">
-                                              <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                          </ul>
-                                      </div>
-                                      <div className="product__item__text">
-                                          <h6><a href="#">Crab Pool Security</a></h6>
-                                          <h5>$30.00</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div className="col-lg-4 col-md-6 col-sm-6">
-                                  <div className="product__item">
-                                      <div className="product__item__pic set-bg" data-setbg="img/product/product-5.jpg">
-                                          <ul className="product__item__pic__hover">
-                                              <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                          </ul>
-                                      </div>
-                                      <div className="product__item__text">
-                                          <h6><a href="#">Crab Pool Security</a></h6>
-                                          <h5>$30.00</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div className="col-lg-4 col-md-6 col-sm-6">
-                                  <div className="product__item">
-                                      <div className="product__item__pic set-bg" data-setbg="img/product/product-6.jpg">
-                                          <ul className="product__item__pic__hover">
-                                              <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                          </ul>
-                                      </div>
-                                      <div className="product__item__text">
-                                          <h6><a href="#">Crab Pool Security</a></h6>
-                                          <h5>$30.00</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div className="col-lg-4 col-md-6 col-sm-6">
-                                  <div className="product__item">
-                                      <div className="product__item__pic set-bg" data-setbg="img/product/product-7.jpg">
-                                          <ul className="product__item__pic__hover">
-                                              <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                          </ul>
-                                      </div>
-                                      <div className="product__item__text">
-                                          <h6><a href="#">Crab Pool Security</a></h6>
-                                          <h5>$30.00</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div className="col-lg-4 col-md-6 col-sm-6">
-                                  <div className="product__item">
-                                      <div className="product__item__pic set-bg" data-setbg="img/product/product-8.jpg">
-                                          <ul className="product__item__pic__hover">
-                                              <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                          </ul>
-                                      </div>
-                                      <div className="product__item__text">
-                                          <h6><a href="#">Crab Pool Security</a></h6>
-                                          <h5>$30.00</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div className="col-lg-4 col-md-6 col-sm-6">
-                                  <div className="product__item">
-                                      <div className="product__item__pic set-bg" data-setbg="img/product/product-9.jpg">
-                                          <ul className="product__item__pic__hover">
-                                              <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                          </ul>
-                                      </div>
-                                      <div className="product__item__text">
-                                          <h6><a href="#">Crab Pool Security</a></h6>
-                                          <h5>$30.00</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div className="col-lg-4 col-md-6 col-sm-6">
-                                  <div className="product__item">
-                                      <div className="product__item__pic set-bg" data-setbg="img/product/product-10.jpg">
-                                          <ul className="product__item__pic__hover">
-                                              <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                          </ul>
-                                      </div>
-                                      <div className="product__item__text">
-                                          <h6><a href="#">Crab Pool Security</a></h6>
-                                          <h5>$30.00</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div className="col-lg-4 col-md-6 col-sm-6">
-                                  <div className="product__item">
-                                      <div className="product__item__pic set-bg" data-setbg="img/product/product-11.jpg">
-                                          <ul className="product__item__pic__hover">
-                                              <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                          </ul>
-                                      </div>
-                                      <div className="product__item__text">
-                                          <h6><a href="#">Crab Pool Security</a></h6>
-                                          <h5>$30.00</h5>
-                                      </div>
-                                  </div>
-                              </div>
-                              <div className="col-lg-4 col-md-6 col-sm-6">
-                                  <div className="product__item">
-                                      <div className="product__item__pic set-bg" data-setbg="img/product/product-12.jpg">
-                                          <ul className="product__item__pic__hover">
-                                              <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                              <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                          </ul>
-                                      </div>
-                                      <div className="product__item__text">
-                                          <h6><a href="#">Crab Pool Security</a></h6>
-                                          <h5>$30.00</h5>
-                                      </div>
-                                  </div>
-                              </div>
+
+                              ) )}
                           </div>
                           <div className="product__pagination">
-                              <a href="#">1</a>
-                              <a href="#">2</a>
-                              <a href="#">3</a>
-                              <a href="#"><i className="fa fa-long-arrow-right"></i></a>
+                              {/*<a href="#">1</a>*/}
+                              {/*<a href="#">2</a>*/}
+                              {/*<a href="#">3</a>*/}
+                              {/*<a href="#"><i className="fa fa-long-arrow-right"></i></a>*/}
                           </div>
                       </div>
                   </div>

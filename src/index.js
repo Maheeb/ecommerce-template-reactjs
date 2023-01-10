@@ -7,6 +7,8 @@ import Layout from "./components/Layout";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Shop from "./components/Shop";
 import Home from "./components/Home";
+import {Provider} from "react-redux";
+import store from "./components/store";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +21,7 @@ const router = createBrowserRouter([
                 element: <Shop />,
             },
             {
-                path: "shop/:shopId",
+                path: "category/:catId",
                 element: <Shop />,
             },
             // {
@@ -41,7 +43,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+      <Provider store={store}>
       <RouterProvider router={router} />
+      </Provider>
   </React.StrictMode>
 );
 

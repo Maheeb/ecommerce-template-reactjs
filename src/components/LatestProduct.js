@@ -1,4 +1,5 @@
 const LatestProduct = () => {
+
   return(
       <>
           <section className="latest-product spad">

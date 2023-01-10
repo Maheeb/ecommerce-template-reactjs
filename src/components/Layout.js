@@ -5,11 +5,13 @@ import Featured from "./Featured";
 import {Link, Outlet, useLocation} from "react-router-dom";
 import HeaderLayout from "./HeaderLayout";
 import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
 
 const Layout = () => {
     let location = useLocation();
     const [clicked, setClicked] = useState(false);
     const [deptStyle, setDeptStyle] = useState({});
+    const categories = useSelector(state => state.create.categories);
 
     useEffect(() => {
         if (location.pathname === '/') {
@@ -59,17 +61,12 @@ const Layout = () => {
                                 </div>
                                 {clicked === true &&
                                     <ul style={deptStyle}>
-                                        <li><a href="#">Fresh Meat</a></li>
-                                        <li><a href="#">Vegetables</a></li>
-                                        <li><a href="#">Fruit & Nut Gifts</a></li>
-                                        <li><a href="#">Fresh Berries</a></li>
-                                        <li><a href="#">Ocean Foods</a></li>
-                                        <li><a href="#">Butter & Eggs</a></li>
-                                        <li><a href="#">Fastfood</a></li>
-                                        <li><a href="#">Fresh Onion</a></li>
-                                        <li><a href="#">Papayaya & Crisps</a></li>
-                                        <li><a href="#">Oatmeal</a></li>
-                                        <li><a href="#">Fresh Bananas</a></li>
+                                        {categories.length>0 && categories.map( (category, index) =>(
+                                        <li key={index}>
+                                            {/*<a href="#">{category.text}</a>*/}
+                                            <Link to= {`category/${category.id}`} >{category.text}</Link>
+                                        </li>
+                                         ))}
                                     </ul>
                                 }
                             </div>

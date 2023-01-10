@@ -1,4 +1,7 @@
+import {useSelector} from "react-redux";
+
 const Featured = () => {
+    const products = useSelector(state => state.create.products);
   return(
       <>
           <section className="featured spad">
@@ -20,10 +23,12 @@ const Featured = () => {
                       </div>
                   </div>
                   <div className="row featured__filter">
-                      <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+
+                      {products.length>0 && products.map((product,index) =>(
+                      <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" key={index}>
                           <div className="featured__item">
                               {/*<div className="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">*/}
-                              <div className="featured__item__pic set-bg" style={{backgroundImage: 'url(' + require('./img/featured/feature-1.jpg') + ')'}}>
+                              <div className="featured__item__pic set-bg" style={{backgroundImage: 'url(' + require(`./img/product/${product.image}`) + ')'}}>
                                   <ul className="featured__item__pic__hover">
                                       <li><a href="#"><i className="fa fa-heart"></i></a></li>
                                       <li><a href="#"><i className="fa fa-retweet"></i></a></li>
@@ -31,116 +36,13 @@ const Featured = () => {
                                   </ul>
                               </div>
                               <div className="featured__item__text">
-                                  <h6><a href="#">Crab Pool Security</a></h6>
-                                  <h5>$30.00</h5>
+                                  <h6><a href="#">{product.name}</a></h6>
+                                  <h5>{product.price}$</h5>
                               </div>
                           </div>
                       </div>
-                      <div className="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-                          <div className="featured__item">
-                              <div className="featured__item__pic set-bg" data-setbg="img/featured/feature-2.jpg">
-                                  <ul className="featured__item__pic__hover">
-                                      <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                  </ul>
-                              </div>
-                              <div className="featured__item__text">
-                                  <h6><a href="#">Crab Pool Security</a></h6>
-                                  <h5>$30.00</h5>
-                              </div>
-                          </div>
-                      </div>
-                      <div className="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-                          <div className="featured__item">
-                              <div className="featured__item__pic set-bg" data-setbg="img/featured/feature-3.jpg">
-                                  <ul className="featured__item__pic__hover">
-                                      <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                  </ul>
-                              </div>
-                              <div className="featured__item__text">
-                                  <h6><a href="#">Crab Pool Security</a></h6>
-                                  <h5>$30.00</h5>
-                              </div>
-                          </div>
-                      </div>
-                      <div className="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-                          <div className="featured__item">
-                              <div className="featured__item__pic set-bg" data-setbg="img/featured/feature-4.jpg">
-                                  <ul className="featured__item__pic__hover">
-                                      <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                  </ul>
-                              </div>
-                              <div className="featured__item__text">
-                                  <h6><a href="#">Crab Pool Security</a></h6>
-                                  <h5>$30.00</h5>
-                              </div>
-                          </div>
-                      </div>
-                      <div className="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                          <div className="featured__item">
-                              <div className="featured__item__pic set-bg" data-setbg="img/featured/feature-5.jpg">
-                                  <ul className="featured__item__pic__hover">
-                                      <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                  </ul>
-                              </div>
-                              <div className="featured__item__text">
-                                  <h6><a href="#">Crab Pool Security</a></h6>
-                                  <h5>$30.00</h5>
-                              </div>
-                          </div>
-                      </div>
-                      <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-                          <div className="featured__item">
-                              <div className="featured__item__pic set-bg" data-setbg="img/featured/feature-6.jpg">
-                                  <ul className="featured__item__pic__hover">
-                                      <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                  </ul>
-                              </div>
-                              <div className="featured__item__text">
-                                  <h6><a href="#">Crab Pool Security</a></h6>
-                                  <h5>$30.00</h5>
-                              </div>
-                          </div>
-                      </div>
-                      <div className="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-                          <div className="featured__item">
-                              <div className="featured__item__pic set-bg" data-setbg="img/featured/feature-7.jpg">
-                                  <ul className="featured__item__pic__hover">
-                                      <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                  </ul>
-                              </div>
-                              <div className="featured__item__text">
-                                  <h6><a href="#">Crab Pool Security</a></h6>
-                                  <h5>$30.00</h5>
-                              </div>
-                          </div>
-                      </div>
-                      <div className="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
-                          <div className="featured__item">
-                              <div className="featured__item__pic set-bg" data-setbg="img/featured/feature-8.jpg">
-                                  <ul className="featured__item__pic__hover">
-                                      <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                      <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                  </ul>
-                              </div>
-                              <div className="featured__item__text">
-                                  <h6><a href="#">Crab Pool Security</a></h6>
-                                  <h5>$30.00</h5>
-                              </div>
-                          </div>
-                      </div>
+
+                      ) )}
                   </div>
               </div>
           </section>

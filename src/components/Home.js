@@ -1,8 +1,10 @@
 import Featured from "./Featured";
 import LatestProduct from "./LatestProduct";
 import FromTheBlog from "./FromTheBlog";
+import {useSelector} from "react-redux";
 
 const Home = () => {
+
     return (
         <>
             <section className="categories">

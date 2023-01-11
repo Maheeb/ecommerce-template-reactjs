@@ -12,17 +12,6 @@ const Shop = () => {
     // const [products,setProducts] = useState([]);
 
 
-    useEffect(() => {
-        // console.log(catId)
-        if (catId != undefined) {
-        let filteredProducts = allProducts.filter(product => product.catID == catId);
-        setProducts(filteredProducts)
-    }
-        else
-        {
-            setProducts(allProducts)
-        }
-    }, [catId]);
 
 
 
@@ -57,7 +46,8 @@ const Shop = () => {
                                   <ul>
                                       {categories.length>0 && categories.map( (category, index) =>(
                                           <li key={index}>
-                                              <a href="#">{category.text}</a>
+                                              {/*<a href="#">{category.text}</a>*/}
+                                              <Link to= {`/category/${category.id}`} >{category.text}</Link>
                                           </li>
                                       ))}
                                   </ul>
@@ -290,10 +280,9 @@ const Shop = () => {
                               </div>
                           </div>
                           <div className="row">
-                              {products.length>0 && products.map((product,index) =>(
+                              {allProducts.length>0 && allProducts.map((product,index) =>(
                               <div className="col-lg-4 col-md-6 col-sm-6" key={index}>
                                   <div className="product__item">
-                                      {/*<div className="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">*/}
                                       <div className="product__item__pic set-bg"  style={{backgroundImage: 'url(' + require(`./img/product/${product.image}`) + ')'}}>
                                           <ul className="product__item__pic__hover">
                                               <li><a href="#"><i className="fa fa-heart"></i></a></li>

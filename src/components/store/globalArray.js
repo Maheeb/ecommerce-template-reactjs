@@ -114,21 +114,24 @@ const initialStoreState ={
         },
 
 
-    ]
+    ],
+    cart:[]
 };
 const storeSlice = createSlice({
     name:"create",
     initialState: initialStoreState,
     reducers:{
-        getFilteredProducts: (state,action) => {
+        addItemsToCart: (state,action) => {
 
+            // let cartProducts = state.products.filter(product => product.catID == action.payload);
 
-            let filteredProducts = state.products.filter(product => product.catID == action.payload);
-            console.log(filteredProducts)
-            state.products =[filteredProducts ];
+            let commonElements = state.products.filter(element => action.payload.includes(element.id));
+
+            // console.log(action.payload)
+            state.cart =[ commonElements ];
         }
     }
 })
 
-export const { getGlobalArrays,getFilteredProducts } = storeSlice.actions
+export const { getGlobalArrays,addItemsToCart } = storeSlice.actions
 export default storeSlice.reducer;

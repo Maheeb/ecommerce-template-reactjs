@@ -9,6 +9,7 @@ import Shop from "./components/Shop";
 import Home from "./components/Home";
 import {Provider} from "react-redux";
 import store from "./components/store";
+import CategoryProduct from "./pages/CategoryProduct";
 
 const router = createBrowserRouter([
     {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "category/:catId",
-                element: <Shop />,
+                element: <CategoryProduct />,
             },
             // {
             //     path: "search/:searchId",

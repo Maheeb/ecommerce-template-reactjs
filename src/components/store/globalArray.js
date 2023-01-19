@@ -115,20 +115,39 @@ const initialStoreState ={
 
 
     ],
-    cart:[]
+    cart:[],
+    productTaken: []
 };
 const storeSlice = createSlice({
     name:"create",
     initialState: initialStoreState,
     reducers:{
         addItemsToCart: (state,action) => {
+            // let commonElements = state.products.filter(element => action.payload.includes(element.id));
+            let items  = state.products.find(item => item.id === action.payload);
 
-            // let cartProducts = state.products.filter(product => product.catID == action.payload);
+            state.cart =[ ...state.cart,items ];
+            let newArray =[];
+            let counts = []
+            for(let i =0; i < state.cart.length; i++){
+                if (counts[state.cart[i].id]){
+                    counts[state.cart[i].id] += 1
+                } else {
+                    counts[state.cart[i].id] = 1
+                }
+            }
+            for (let key in counts){
+                if (counts[key] >= 1){
+                    newArray.push({ id : parseInt(key), counted: counts[key]})
+                }
+            }
+            let result = [];
 
-            let commonElements = state.products.filter(element => action.payload.includes(element.id));
+            newArray.forEach((value,key)=>{
+                    result[value.id] = value.counted;
+            })
 
-            // console.log(action.payload)
-            state.cart =[ commonElements ];
+            state.productTaken =[ result ];
         }
     }
 })

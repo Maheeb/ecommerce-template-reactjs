@@ -6,10 +6,59 @@ const Featured = () => {
     const products = useSelector(state => state.create.products);
     const carts = useSelector(state => state.create.cart);
     const productTaken = useSelector(state => state.create.productTaken);
-    // console.log(productTaken)
+
+    console.log(productTaken)
+    let newArray =[];
+    let counts = []
+    for(let i =0; i < carts.length; i++){
+        // console.log(carts[i].id)
+        if (counts[carts[i].id]){
+            counts[carts[i].id] += 1
+        } else {
+            counts[carts[i].id] = 1
+        }
+    }
+    // console.log(counts)
+    for (let key in counts){
+        if (counts[key] >= 1){
+            // console.log(key + " counted: " + counts[key] + " times.")
+            newArray.push({ id : parseInt(key), counted: counts[key]})
+        }
+    }
+    // console.log(newArray)
+
+   let result = [];
+
+    newArray.forEach((value,key)=>{
+        result[value.id]= value.counted;
+    })
+
+    // carts.map((value, index) => {
+    //         console.log(value.id +"=="+ result[value.id])
+    // })
+
+
+    let test = []
+   carts.forEach(obj1 => {
+        let obj2 = newArray.find(obj  => obj.id === obj1.id);
+        if (obj2) {
+            // console.log(obj2)
+            //  obj2.counted = obj1.counted;
+            //  carts.push(obj2.counted)
+
+        }
+
+
+    });
+    // console.log(carts)
+    // console.log(carts[0].push({counted:0}));
+
+
+    // console.log(matched);
+    // console.log(newArray);
 
     const dispatch = useDispatch();
-
+    // const [item, setItem] = useState([]);
     const [item, setItem] = useState("");
     const linkStyle = {
         pointerEvents: "none",
@@ -18,12 +67,24 @@ const Featured = () => {
         display: "none"
     };
     useEffect(() => {
+        // console.log(carts)
     }, [carts]);
 
     const handleClick = (e, v) => {
         e.preventDefault();
         addToCart(v);
     };
+    // useEffect(() => {
+    //     if (item.length>0) {
+    //         addToCart(item);
+    //     }
+    // }, [item]);
+
+    // useEffect(() => {
+    //     // if (item !="") {
+    //         addToCart(item);
+    //     // }
+    // }, [item]);
 
     const addToCart = (v) => {
         // console.log(v)

@@ -125,36 +125,29 @@ const storeSlice = createSlice({
         addItemsToCart: (state,action) => {
             // let commonElements = state.products.filter(element => action.payload.includes(element.id));
             let items  = state.products.find(item => item.id === action.payload);
-            state.cart =[ ...state.cart,items ];
-            let cartTest = state.cart.map(obj => ({ ...obj, count: 1 }))
-            let counts = []
-            let newArray =[];
-            for(let i =0; i < cartTest.length; i++){
 
+            state.cart =[ ...state.cart,items ];
+            let newArray =[];
+            let counts = []
+            for(let i =0; i < state.cart.length; i++){
                 if (counts[state.cart[i].id]){
                     counts[state.cart[i].id] += 1
-                    if (cartTest[i].id == cartTest[i].id)
-                    {
-                        cartTest[i]['count']= counts[state.cart[i].id]
-                    }
                 } else {
                     counts[state.cart[i].id] = 1
-                    cartTest[i]['count']=1
                 }
             }
-
-            let ids = {};
-            cartTest = cartTest.filter(function (item) {
-                if (!ids[item.id]) {
-                    ids[item.id] = item;
-                    return true;
-                } else {
-                    ids[item.id] = item;
-                    return false;
+            for (let key in counts){
+                if (counts[key] >= 1){
+                    newArray.push({ id : parseInt(key), counted: counts[key]})
                 }
-            });
-            // let finalArr = Object.values(ids);
-            state.productTaken = Object.values(ids);
+            }
+            let result = [];
+
+            newArray.forEach((value,key)=>{
+                    result[value.id] = value.counted;
+            })
+
+            state.productTaken =[ result ];
         }
     }
 })

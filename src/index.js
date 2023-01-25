@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import {Provider} from "react-redux";
 import store from "./components/store";
 import CategoryProduct from "./pages/CategoryProduct";
+import ProductDetail from "./pages/ProductDetail";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
             {
                 path: "category/:catId",
                 element: <CategoryProduct />,
+            },
+            {
+                path: "product/:productId",
+                element: <ProductDetail />,
             },
             // {
             //     path: "search/:searchId",

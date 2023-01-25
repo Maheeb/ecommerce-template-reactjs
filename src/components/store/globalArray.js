@@ -124,40 +124,34 @@ const storeSlice = createSlice({
     reducers:{
         addItemsToCart: (state,action) => {
             // let commonElements = state.products.filter(element => action.payload.includes(element.id));
-            let items  = state.products.find(item => item.id === action.payload);
-            state.cart =[ ...state.cart,items ];
-            let cartTest = state.cart.map(obj => ({ ...obj, count: 1 }))
-            let counts = []
-            let newArray =[];
-            for(let i =0; i < cartTest.length; i++){
+                let items = state.products.find(item => item.id === action.payload);
+                state.cart = [...state.cart, items];
+                let cartTest = state.cart.map(obj => ({...obj, count: 1}))
+                state.productTaken = cartTest;
 
-                if (counts[state.cart[i].id]){
-                    counts[state.cart[i].id] += 1
-                    if (cartTest[i].id == cartTest[i].id)
-                    {
-                        cartTest[i]['count']= counts[state.cart[i].id]
+        },
+        updateSingleProduct: (state,action) => {
+            let isExist = state.productTaken.find(element=>element.id == action.payload.product_id)
+            if (isExist != undefined) {
+                state.productTaken.find(function (item) {
+                    if (item.id === action.payload.product_id) {
+                            return item.count = action.payload.addedQuantity
+
                     }
-                } else {
-                    counts[state.cart[i].id] = 1
-                    cartTest[i]['count']=1
-                }
+                })
+            }
+            else
+            {
+                let  items  = state.products.find(item => item.id === action.payload.product_id);
+                 items.count=action.payload.addedQuantity
+                state.productTaken =[...state.productTaken,items]
+
             }
 
-            let ids = {};
-            cartTest = cartTest.filter(function (item) {
-                if (!ids[item.id]) {
-                    ids[item.id] = item;
-                    return true;
-                } else {
-                    ids[item.id] = item;
-                    return false;
-                }
-            });
-            // let finalArr = Object.values(ids);
-            state.productTaken = Object.values(ids);
+
         }
     }
 })
 
-export const { getGlobalArrays,addItemsToCart } = storeSlice.actions
+export const { getGlobalArrays,addItemsToCart,updateSingleProduct } = storeSlice.actions
 export default storeSlice.reducer;

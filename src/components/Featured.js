@@ -1,12 +1,13 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {addItemsToCart} from "./store/globalArray";
+import {addItemsToCart, updateSingleProduct} from "./store/globalArray";
+import {Link} from "react-router-dom";
 
 const Featured = () => {
     const products = useSelector(state => state.create.products);
     const carts = useSelector(state => state.create.cart);
     const productTaken = useSelector(state => state.create.productTaken);
-    // console.log(productTaken)
+    const [defaultValue, setDefaultValue] = useState(1);
 
     const dispatch = useDispatch();
 
@@ -27,7 +28,15 @@ const Featured = () => {
 
     const addToCart = (v) => {
         // console.log(v)
-        dispatch(addItemsToCart(v));
+        let isExist = productTaken.find(item => item.id == v)
+        if (isExist != undefined)
+        {
+            dispatch(updateSingleProduct({product_id:v,addedQuantity:isExist.count+1}))
+        }
+       else {
+           
+            dispatch(addItemsToCart(v));
+        }
     }
     return (
         <>
@@ -59,7 +68,9 @@ const Featured = () => {
                                          style={{backgroundImage: 'url(' + require(`./img/product/${product.image}`) + ')'}}>
                                         <ul className="featured__item__pic__hover">
                                             <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i className="fa fa-retweet"></i></a></li>
+                                            <li>
+                                                <Link to= {`product/${product.id}`} ><i className="fa fa-retweet"></i></Link>
+                                            </li>
                                             <li>
                                                 <a href="#" onClick={(event) => handleClick(event, product.id)}>
                                                     <i className="fa fa-shopping-cart"></i>

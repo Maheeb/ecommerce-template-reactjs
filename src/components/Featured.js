@@ -9,6 +9,7 @@ const Featured = () => {
     const productTaken = useSelector(state => state.create.productTaken);
     const [defaultValue, setDefaultValue] = useState(1);
 
+    console.log(productTaken)
     const dispatch = useDispatch();
 
     const [item, setItem] = useState("");
@@ -31,10 +32,11 @@ const Featured = () => {
         let isExist = productTaken.find(item => item.id == v)
         if (isExist != undefined)
         {
+
             dispatch(updateSingleProduct({product_id:v,addedQuantity:isExist.count+1}))
         }
        else {
-           
+
             dispatch(addItemsToCart(v));
         }
     }

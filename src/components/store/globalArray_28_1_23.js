@@ -1,6 +1,5 @@
 import {createSlice, current} from "@reduxjs/toolkit";
 import {v4 as uuidv4} from 'uuid';
-import {json} from "react-router-dom";
 
 function generateSlug(text) {
     return text
@@ -125,18 +124,13 @@ const storeSlice = createSlice({
     reducers:{
         addItemsToCart: (state,action) => {
             // let commonElements = state.products.filter(element => action.payload.includes(element.id));
-            //     let items = state.products.find(item => item.id === action.payload);
-            // console.log(JSON.stringify(action.payload))
-            //     state.cart = [...state.cart, items];
-                // console.log(JSON.stringify(state.cart))
-            // let cartTest = state.cart.map(obj => ({...obj, count: 1}))
-            //
-            //     state.productTaken =  cartTest;
+                let items = state.products.find(item => item.id === action.payload);
+                state.cart = [...state.cart, items];
+
+                let cartTest = state.cart.map(obj => ({...obj, count: 1}))
+                state.productTaken = cartTest;
 
 
-            let  items  = state.products.find(item => item.id === action.payload);
-            items.count=1
-            state.productTaken =[...state.productTaken,items]
 
         },
         updateSingleProduct: (state,action) => {

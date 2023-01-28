@@ -39,6 +39,7 @@ const ProductDetail = () => {
         setDefaultValue(product.count == undefined ? 1 : product.count);
     },[product.count])
 
+
     const handleSingleItemClick = (e, v) => {
         e.preventDefault();
         let isProductInCart = cartProducts.find(function (item) {

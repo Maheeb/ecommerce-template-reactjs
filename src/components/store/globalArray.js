@@ -124,15 +124,6 @@ const storeSlice = createSlice({
     initialState: initialStoreState,
     reducers:{
         addItemsToCart: (state,action) => {
-            // let commonElements = state.products.filter(element => action.payload.includes(element.id));
-            //     let items = state.products.find(item => item.id === action.payload);
-            // console.log(JSON.stringify(action.payload))
-            //     state.cart = [...state.cart, items];
-                // console.log(JSON.stringify(state.cart))
-            // let cartTest = state.cart.map(obj => ({...obj, count: 1}))
-            //
-            //     state.productTaken =  cartTest;
-
 
             let  items  = state.products.find(item => item.id === action.payload);
             items.count=1
@@ -145,10 +136,9 @@ const storeSlice = createSlice({
                   state.productTaken.find(function (item) {
                     if (item.id === action.payload.product_id) {
                             return item.count = action.payload.addedQuantity
-                             // item.count = action.payload.addedQuantity
+
                     }
                 })
-                // return state.productTaken = [...state.productTaken]
             }
             else
             {
@@ -157,9 +147,15 @@ const storeSlice = createSlice({
                 state.productTaken =[...state.productTaken,items]
 
             }
-        }
+        },
+        removeCartItem: (state,action) => {
+
+            let  items  = state.productTaken.filter(item => item.id != action.payload.product_id);
+            state.productTaken =items;
+
+        },
     }
 })
 
-export const { getGlobalArrays,addItemsToCart,updateSingleProduct } = storeSlice.actions
+export const { getGlobalArrays,addItemsToCart,updateSingleProduct,removeCartItem } = storeSlice.actions
 export default storeSlice.reducer;

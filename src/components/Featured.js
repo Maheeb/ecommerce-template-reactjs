@@ -5,11 +5,13 @@ import {Link} from "react-router-dom";
 
 const Featured = () => {
     const products = useSelector(state => state.create.products);
+    const categories = useSelector(state => state.create.categories);
     const carts = useSelector(state => state.create.cart);
     const productTaken = useSelector(state => state.create.productTaken);
     const [defaultValue, setDefaultValue] = useState(1);
+    const [catWiseItems, setCatWiseItems] = useState(products);
 
-    console.log(productTaken)
+
     const dispatch = useDispatch();
 
     const [item, setItem] = useState("");
@@ -26,16 +28,25 @@ const Featured = () => {
         e.preventDefault();
         addToCart(v);
     };
+    const handleCategory = (e, v) => {
+        e.preventDefault();
+        if (v !='all') {
+            let updatedItems = products.filter(item => item.catID == v)
+            setCatWiseItems(updatedItems)
+        }
+        else
+        {
+            setCatWiseItems(products)
+        }
+
+    }
 
     const addToCart = (v) => {
-        // console.log(v)
         let isExist = productTaken.find(item => item.id == v)
-        if (isExist != undefined)
-        {
+        if (isExist != undefined) {
 
-            dispatch(updateSingleProduct({product_id:v,addedQuantity:isExist.count+1}))
-        }
-       else {
+            dispatch(updateSingleProduct({product_id: v, addedQuantity: isExist.count + 1}))
+        } else {
 
             dispatch(addItemsToCart(v));
         }
@@ -51,18 +62,19 @@ const Featured = () => {
                             </div>
                             <div className="featured__controls">
                                 <ul>
-                                    <li className="active" data-filter="*">All</li>
-                                    <li data-filter=".oranges">Oranges</li>
-                                    <li data-filter=".fresh-meat">Fresh Meat</li>
-                                    <li data-filter=".vegetables">Vegetables</li>
-                                    <li data-filter=".fastfood">Fastfood</li>
+
+                                    <li className="" onClick={(event) => handleCategory(event, 'all')}>All</li>
+                                    {categories.length > 0 && categories.map((item, index) => (
+
+                                        <li className="" key={index}  onClick={(event) => handleCategory(event, item.id)}>{item.text}</li>
+                                    ))}
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div className="row featured__filter">
 
-                        {products.length > 0 && products.map((product, index) => (
+                        {catWiseItems.length > 0 && catWiseItems.map((product, index) => (
                             <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" key={index}>
                                 <div className="featured__item">
                                     {/*<div className="featured__item__pic set-bg" data-setbg="img/featured/feature-1.jpg">*/}
@@ -71,7 +83,8 @@ const Featured = () => {
                                         <ul className="featured__item__pic__hover">
                                             <li><a href="#"><i className="fa fa-heart"></i></a></li>
                                             <li>
-                                                <Link to= {`product/${product.id}`} ><i className="fa fa-retweet"></i></Link>
+                                                <Link to={`product/${product.id}`}><i
+                                                    className="fa fa-retweet"></i></Link>
                                             </li>
                                             <li>
                                                 <a href="#" onClick={(event) => handleClick(event, product.id)}>

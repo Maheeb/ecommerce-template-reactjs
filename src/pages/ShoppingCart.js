@@ -1,13 +1,16 @@
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {updateSingleProduct} from "../components/store/globalArray";
+import {removeCartItem, updateSingleProduct} from "../components/store/globalArray";
 
 const ShoppingCart = () => {
     const cartProducts = useSelector(state => state.create.productTaken);
     const [products,setProduct] = useState([]);
     const [localValues, setLocalValues] = useState(cartProducts);
     const dispatch = useDispatch();
+
+
+    const total = cartProducts.reduce((acc, item) => acc + (item.count*item.price), 0);
 
 
     useEffect(()=>{
@@ -50,6 +53,10 @@ const ShoppingCart = () => {
 
         setLocalValues(newLocalValues);
         dispatch(updateSingleProduct({product_id:product_id,addedQuantity:parseInt(dec)}))
+    }
+    const removeItem = (e, index, product_id) => {
+        e.preventDefault();
+        dispatch(removeCartItem({product_id:product_id}))
     }
 
   return(
@@ -115,7 +122,10 @@ const ShoppingCart = () => {
                                             ${item.price*item.count}
                                         </td>
                                         <td className="shoping__cart__item__close">
-                                            <span className="icon_close"></span>
+                                                  <span className="icon_close" onClick={(event) => {
+                                                      removeItem(event, index,item.id);
+                                                  }}></span>
+                                            {/*<span className="icon_close"></span>*/}
                                         </td>
                                     </tr>
 
@@ -138,8 +148,8 @@ const ShoppingCart = () => {
                             <div className="shoping__checkout">
                                 <h5>Cart Total</h5>
                                 <ul>
-                                    <li>Subtotal <span>$454.98</span></li>
-                                    <li>Total <span>$454.98</span></li>
+                                    <li>Subtotal <span>${total}</span></li>
+                                    <li>Total <span>${total}</span></li>
                                 </ul>
                                 <a href="#" className="primary-btn">PROCEED TO CHECKOUT</a>
                             </div>

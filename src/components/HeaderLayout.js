@@ -3,6 +3,9 @@ import {useSelector} from "react-redux";
 
 const HeaderLayout = () => {
     const carts = useSelector(state => state.create.cart);
+    const cartProducts = useSelector(state => state.create.productTaken);
+    const totalAmount = cartProducts.reduce((acc, item) => acc + (item.count*item.price), 0);
+    const totalItemInCart = cartProducts.reduce((acc, item) => acc + item.count, 0);
   return(
       <>
           <div className="humberger__menu__overlay"></div>
@@ -136,9 +139,9 @@ const HeaderLayout = () => {
                           <div className="header__cart">
                               <ul>
                                   <li><a href="#"><i className="fa fa-heart"></i> <span>1</span></a></li>
-                                  <li><a href="#"><i className="fa fa-shopping-bag"></i> <span>{carts.length}</span></a></li>
+                                  <li><a href="#"><i className="fa fa-shopping-bag"></i> <span>{totalItemInCart}</span></a></li>
                               </ul>
-                              <div className="header__cart__price">item: <span>$150.00</span></div>
+                              <div className="header__cart__price">item: <span>${totalAmount}</span></div>
                           </div>
                       </div>
                   </div>

@@ -1,6 +1,7 @@
 import {Link, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
+import {addItemsToCart, updateSingleProduct} from "../components/store/globalArray";
 
 const CategoryProduct = () => {
     let { catId } = useParams();
@@ -8,8 +9,23 @@ const CategoryProduct = () => {
     const allProducts = useSelector(state => state.create.products);
     const dispatch = useDispatch();
     const [products,setProducts] = useState(allProducts);
-    // const [products,setProducts] = useState([]);
+    const productTaken = useSelector(state => state.create.productTaken);
 
+    // const [products,setProducts] = useState([]);
+    const handleClick = (e, v) => {
+        e.preventDefault();
+        addToCart(v);
+    };
+    const addToCart = (v) => {
+        let isExist = productTaken.find(item => item.id == v)
+        if (isExist != undefined) {
+
+            dispatch(updateSingleProduct({product_id: v, addedQuantity: isExist.count + 1}))
+        } else {
+
+            dispatch(addItemsToCart(v));
+        }
+    }
 
     useEffect(() => {
         // console.log(catId)
@@ -290,8 +306,18 @@ const CategoryProduct = () => {
                                             <div className="product__item__pic set-bg"  style={{backgroundImage: 'url(' + require(`./../components/img/product/${product.image}`) + ')'}}>
                                                 <ul className="product__item__pic__hover">
                                                     <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                                    <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                                    <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
+                                                    {/*<li><a href="#"><i className="fa fa-retweet"></i></a></li>*/}
+
+                                                    <li>
+                                                        <Link to={`/product/${product.id}`}><i
+                                                            className="fa fa-retweet"></i></Link>
+                                                    </li>
+
+                                                    {/*<li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>*/}
+                                                    <li> <a href="#" onClick={(event) => handleClick(event, product.id)}>
+                                                        <i className="fa fa-shopping-cart"></i>
+                                                    </a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <div className="product__item__text">

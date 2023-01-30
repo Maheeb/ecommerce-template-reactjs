@@ -45,70 +45,70 @@ const initialStoreState ={
     products:[
         {
             id: 1,
-            name: 'Crab Pool Security',
+            name: 'Lorem ipsum dolor sit amet',
             catID:1,
             price: 10,
             image: 'product-1.jpg'
         },
         {
             id: 2,
-            name: 'Crab Pool Security',
+            name: 'Suspendisse tempus',
             catID:1,
             price: 20,
             image: 'product-2.jpg'
         },
         {
             id: 3,
-            name: 'Crab Pool Security',
+            name: 'Etiam elementum',
             catID:2,
             price: 30,
             image: 'product-3.jpg'
         },
         {
             id: 4,
-            name: 'Crab Pool Security',
+            name: 'Proin a augue ligula',
             catID:2,
             price: 40,
             image: 'product-4.jpg'
         },
         {
             id: 5,
-            name: 'Crab Pool Security',
+            name: 'Fusce vel vehicula',
             catID:3,
             price: 50,
             image: 'product-5.jpg'
         },
         {
             id: 6,
-            name: 'Crab Pool Security',
+            name: 'Donec egestas ligula',
             catID:3,
             price: 60,
             image: 'product-6.jpg'
         },
         {
             id: 7,
-            name: 'Crab Pool Security',
+            name: 'Sed in posuere diam',
             catID:4,
             price: 70,
             image: 'product-7.jpg'
         },
         {
             id: 8,
-            name: 'Crab Pool Security',
+            name: 'Morbi tempor consectetur',
             catID:4,
             price: 80,
             image: 'product-8.jpg'
         },
         {
             id: 9,
-            name: 'Crab Pool Security',
+            name: 'Sed ipsum augue',
             catID:5,
             price: 90,
             image: 'product-9.jpg'
         },
         {
             id: 10,
-            name: 'Crab Pool Security',
+            name: 'Ut fermentum',
             catID:5,
             price: 100,
             image: 'product-10.jpg'

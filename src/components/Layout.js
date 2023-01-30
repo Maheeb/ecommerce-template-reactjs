@@ -12,7 +12,42 @@ const Layout = () => {
     const [clicked, setClicked] = useState(false);
     const [deptStyle, setDeptStyle] = useState({});
     const categories = useSelector(state => state.create.categories);
+    const products = useSelector(state => state.create.products);
 
+    const [isOpen, setIsOpen] = useState(false);
+    const [inputText, setInputText] = useState("");
+    let inputHandler = (e) => {
+        var lowerCase = e.target.value.toLowerCase();
+        setInputText(lowerCase);
+    };
+
+    const filteredData = products.filter((el) => {
+        //if no input the return the original
+        if (inputText === '') {
+            // setIsOpen(false)
+            return el;
+        }
+        //return the item which contains the user input
+        else {
+            return el.name.toLowerCase().includes(inputText)
+        }
+    })
+    // console.log(filteredData)
+
+    useEffect(()=>{
+        if (inputText === '')
+        {
+            setIsOpen(false)
+        }
+        else
+        {
+            setIsOpen(true)
+        }
+
+    },[inputText])
+
+
+    // console.log(handleSearch)
     useEffect(() => {
         if (location.pathname === '/') {
             setClicked(true);
@@ -74,16 +109,32 @@ const Layout = () => {
                         <div className="col-lg-9">
                             <div className="hero__search">
                                 <div className="hero__search__form">
-                                    <form action="#">
-                                        <div className="hero__search__categories">
-                                            All Categories
-                                            <span className="arrow_carrot-down"></span>
-                                        </div>
-                                        <input type="text" placeholder="What do yo u need?"/>
-                                        <button type="submit" className="site-btn">SEARCH</button>
+                                    <form action="#" >
+                                        <input
+                                            onChange={inputHandler}
+                                            type="text" placeholder="What do yo u need?"
+                                        />
+                                        {/*<button type="submit" className="site-btn">SEARCH</button>*/}
 
                                     </form>
                                 </div>
+                                <div>
+                                    {isOpen && filteredData.length > 0 && (
+                                        <ul style={{ position: "absolute", zIndex: 1,marginTop:'57px',marginLeft:'3px',backgroundColor:'#f9f9f9',minWidth:'608px',boxShadow:' 0px 8px 16px 0px rgba(0,0,0,0.2)',listStyle:'none' }}>
+                                            {filteredData.map((suggestion, index) => (
+                                                <li key={index}>
+                                                    <Link to={`product/${suggestion.id}`}
+                                                        style={{color:'black',padding:'12px 16px',textDecoration:'none',display:'block'}}
+                                                    >
+                                                        {suggestion.name}
+                                                    </Link>
+
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+
                                 <div className="hero__search__phone">
                                     <div className="hero__search__phone__icon">
                                         <i className="fa fa-phone"></i>

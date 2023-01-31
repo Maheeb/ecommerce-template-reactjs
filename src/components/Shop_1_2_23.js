@@ -19,29 +19,24 @@ const Shop = () => {
 
 
     const addToCart = (v) => {
-        // console.log(productTaken.length)
+        console.log(productTaken.length)
         let isExist = (productTaken.length>0) && productTaken.find(item => item.id == v)
-        // console.log(isExist)
+        console.log(isExist)
         if ( isExist) {
             // console.log(isExist)
-            // console.log('exist')
+            console.log('exist')
             dispatch(updateSingleProduct({product_id: v, addedQuantity: isExist.count + 1}))
         }
         else {
-            // console.log('new')
+            console.log('new')
             dispatch(addItemsToCart(v));
         }
     }
     const [range, setRange] =  useState(50);
     const rangeSelector = (event) => {
         // console.log(event.target.value)
-        if (event.target.value !="")
-        {
-            let items = allProducts.filter(item => item.price <= event.target.value )
-            setProducts(items);
-        }
-        setRange(parseInt(event.target.value));
-
+        setRange(event.target.value);
+        // console.log()
     };
 
   return(
@@ -142,7 +137,7 @@ const Shop = () => {
                               </div>
                           </div>
                           <div className="row">
-                              {products.length>0 && products.map((product,index) =>(
+                              {allProducts.length>0 && allProducts.map((product,index) =>(
 
                               <div className="col-lg-4 col-md-6 col-sm-6" key={index}>
                                   <div className="product__item">

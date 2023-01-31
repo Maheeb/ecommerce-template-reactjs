@@ -151,7 +151,8 @@ const ShoppingCart = () => {
                                     <li>Subtotal <span>${total}</span></li>
                                     <li>Total <span>${total}</span></li>
                                 </ul>
-                                <a href="#" className="primary-btn">PROCEED TO CHECKOUT</a>
+                                <Link to={`/checkout`} className="primary-btn">PROCEED TO CHECKOUT</Link>
+                                {/*<a href="#" className="primary-btn">PROCEED TO CHECKOUT</a>*/}
                             </div>
                         </div>
                     </div>

@@ -12,6 +12,7 @@ import store from "./components/store";
 import CategoryProduct from "./pages/CategoryProduct";
 import ProductDetail from "./pages/ProductDetail";
 import ShoppingCart from "./pages/ShoppingCart";
+import CheckOut from "./pages/CheckOut";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             {
                 path: "shopping-cart",
                 element: <ShoppingCart />,
+            },
+            {
+                path: "checkout",
+                element: <CheckOut />,
             },
             // {
             //     path: "search/:searchId",

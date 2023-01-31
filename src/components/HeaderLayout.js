@@ -4,8 +4,8 @@ import {useSelector} from "react-redux";
 const HeaderLayout = () => {
     const carts = useSelector(state => state.create.cart);
     const cartProducts = useSelector(state => state.create.productTaken);
-    const totalAmount = cartProducts.reduce((acc, item) => acc + (item.count*item.price), 0);
-    const totalItemInCart = cartProducts.reduce((acc, item) => acc + item.count, 0);
+    const totalAmount = cartProducts.length>0 && cartProducts.reduce((acc, item) => acc + (item.count*item.price), 0);
+    const totalItemInCart = cartProducts.length>0 && cartProducts.reduce((acc, item) => acc + item.count, 0);
   return(
       <>
           <div className="humberger__menu__overlay"></div>
@@ -44,7 +44,12 @@ const HeaderLayout = () => {
                                   <a href="./shop-details.html">Shop Details</a>
                               </li>
                               <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                              <li><a href="./checkout.html">Check Out</a></li>
+
+                              {/*<li><a href="./checkout.html">Check Out</a></li>*/}
+                              <li>
+
+                                  <Link to={`/checkout`}>Check Out</Link>
+                              </li>
                               <li><a href="./blog-details.html">Blog Details</a></li>
                           </ul>
                       </li>
@@ -126,7 +131,9 @@ const HeaderLayout = () => {
                                           <li>
                                               <Link to='/shopping-cart'>Shopping Cart</Link>
                                           </li>
-                                          <li><a href="./checkout.html">Check Out</a></li>
+
+                                          {/*<li><a href="./checkout.html">Check Out</a></li>*/}
+                                          <li>   <Link to={`/checkout`}>Check Out</Link></li>
                                           <li><a href="./blog-details.html">Blog Details</a></li>
                                       </ul>
                                   </li>

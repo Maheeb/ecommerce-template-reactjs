@@ -133,9 +133,9 @@ const storeSlice = createSlice({
         updateSingleProduct: (state,action) => {
             let isExist = state.productTaken.find(element=>element.id == action.payload.product_id)
             if (isExist != undefined) {
-                  state.productTaken.find(function (item) {
+                state.productTaken.find(function (item) {
                     if (item.id === action.payload.product_id) {
-                            return item.count = action.payload.addedQuantity
+                        return item.count = action.payload.addedQuantity
 
                     }
                 })
@@ -143,7 +143,7 @@ const storeSlice = createSlice({
             else
             {
                 let  items  = state.products.find(item => item.id === action.payload.product_id);
-                 items.count=action.payload.addedQuantity
+                items.count=action.payload.addedQuantity
                 state.productTaken =[...state.productTaken,items]
 
             }
@@ -154,8 +154,15 @@ const storeSlice = createSlice({
             state.productTaken =items;
 
         },
+        clearCart: (state,action) => {
+
+            if (action.payload.type=='yes') {
+                state.productTaken = initialStoreState;
+            }
+
+        },
     }
 })
 
-export const { getGlobalArrays,addItemsToCart,updateSingleProduct,removeCartItem } = storeSlice.actions
+export const { getGlobalArrays,addItemsToCart,updateSingleProduct,removeCartItem,clearCart } = storeSlice.actions
 export default storeSlice.reducer;

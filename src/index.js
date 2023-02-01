@@ -13,6 +13,9 @@ import CategoryProduct from "./pages/CategoryProduct";
 import ProductDetail from "./pages/ProductDetail";
 import ShoppingCart from "./pages/ShoppingCart";
 import CheckOut from "./pages/CheckOut";
+import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
+import Contact from "./pages/Contact";
 
 const router = createBrowserRouter([
     {
@@ -40,10 +43,19 @@ const router = createBrowserRouter([
                 path: "checkout",
                 element: <CheckOut />,
             },
-            // {
-            //     path: "search/:searchId",
-            //     element: <SearchResults />,
-            // },
+            {
+                path: "blog",
+                element: <Blog />,
+            },
+            {
+                path: "blog/:blogId",
+                element: <BlogDetail />,
+            },
+            {
+                path: "contact",
+                element: <Contact />,
+            },
+
         ],
 
     },

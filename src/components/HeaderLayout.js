@@ -137,8 +137,11 @@ const HeaderLayout = () => {
                                           <li><a href="./blog-details.html">Blog Details</a></li>
                                       </ul>
                                   </li>
-                                  <li><a href="./blog.html">Blog</a></li>
-                                  <li><a href="./contact.html">Contact</a></li>
+
+                                  {/*<li><a href="./blog.html">Blog</a></li>*/}
+                                  <li>   <Link to={`/blog`}>Blog</Link></li>
+                                  {/*<li><a href="./contact.html">Contact</a></li>*/}
+                                  <li>   <Link to={`/contact`}>Contact</Link></li>
                               </ul>
                           </nav>
                       </div>

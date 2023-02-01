@@ -116,6 +116,44 @@ const initialStoreState ={
 
 
     ],
+    blogs: [
+        {
+            id:1,
+            catId:1,
+            title:'6 ways to prepare breakfast for 30',
+
+        },
+        {
+            id:2,
+            catId:1,
+            title:'Cooking tips make cooking simple',
+
+        },
+        {
+            id:3,
+            catId:2,
+            title:'The Moment You Need To Remove Garlic From The Menu',
+
+        },
+        {
+            id:4,
+            catId:2,
+            title:'Visit the clean farm in the US',
+
+        },
+        {
+            id:5,
+            catId:3,
+            title:'aliquet nunc non est tincidunt ',
+
+        },
+        {
+            id:6,
+            catId:3,
+            title:'Suspendisse venenatis arcu non tellus',
+
+        },
+    ],
     cart:[],
     productTaken: []
 };
